@@ -19,7 +19,7 @@ class RouteModel : public Model {
         bool visited = false;
         std::vector<Node *> neighbors;
 
-        float distance(const Node node){
+        float distance(const Node node) const {
           float xDiff = (this->x - node.x);
           float xDiffPower2 = xDiff * xDiff;
           float yDiff =  (this->y - node.y);
