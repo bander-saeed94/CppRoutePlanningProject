@@ -27,7 +27,7 @@ class RouteModel : public Model {
           float xDiffPower2 = xDiff * xDiff;
           float yDiff =  (this->y - node.y);
           float yDiffPower2 = yDiff * yDiff;
-          return std::sqrt(yDiffPower2 + yDiffPower2);
+          return std::sqrt(xDiffPower2 + yDiffPower2);
         }
         Node(){}
         Node(int idx, RouteModel * search_model, Model::Node node) : Model::Node(node), parent_model(search_model), index(idx) {}
