@@ -6,6 +6,9 @@
 #include <unordered_map>
 #include "model.h"
 #include <iostream>
+#include <vector>
+using std::vector;
+using std::unordered_map;
 
 class RouteModel : public Model {
 
@@ -17,7 +20,7 @@ class RouteModel : public Model {
         float h_value = std::numeric_limits<float>::max();
         float g_value = 0.0;
         bool visited = false;
-        std::vector<Node *> neighbors;
+        vector<Node *> neighbors;
 
         float distance(const Node node) const {
           float xDiff = (this->x - node.x);
@@ -36,12 +39,17 @@ class RouteModel : public Model {
     };
     
     // Add public RouteModel variables and methods here.
-    RouteModel(const std::vector<std::byte> &xml);  
-    std::vector<Node> path; // This variable will eventually store the path that is found by the A* search.
-    std::vector<Node> &SNodes(){ return m_Nodes; }
+    RouteModel(const vector<std::byte> &xml);  
+    vector<Node> path; // This variable will eventually store the path that is found by the A* search.
+    vector<Node> &SNodes(){ return m_Nodes; }
+    unordered_map<int,vector<const Model::Road *>> &GetNodeToRoadMap(){
+      return node_to_road;
+    }
   private:
     // Add private RouteModel variables and methods here.
-    std::vector<Node> m_Nodes;
+    vector<Node> m_Nodes;
+    unordered_map<int,vector<const Model::Road *>> node_to_road;
+    void CreateNodeToRoadHashmap();
 };
 
 #endif
