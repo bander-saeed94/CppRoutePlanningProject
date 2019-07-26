@@ -21,6 +21,7 @@ class RouteModel : public Model {
         float g_value = 0.0;
         bool visited = false;
         vector<Node *> neighbors;
+        void FindNeighbors();
 
         float distance(const Node node) const {
           float xDiff = (this->x - node.x);
