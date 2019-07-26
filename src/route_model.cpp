@@ -50,9 +50,33 @@ void RouteModel::Node::FindNeighbors()
 {
     for (auto &road : parent_model->node_to_road[this->index])
     {
-       RouteModel::Node *neighbor = FindNeighbor(parent_model->Ways()[road->way].nodes);
-       if(neighbor != nullptr){
-           neighbors.emplace_back(neighbor);
-       }
+        RouteModel::Node *neighbor = FindNeighbor(parent_model->Ways()[road->way].nodes);
+        if (neighbor != nullptr)
+        {
+            neighbors.emplace_back(neighbor);
+        }
     }
+}
+
+RouteModel::Node &RouteModel::FindClosestNode(int x, int y)
+{
+    Node input = Node();
+    input.x = x;
+    input.y = y;
+    float min_dist = std::numeric_limits<float>::max();
+    float dist;
+    int closest_idx;
+    for (auto &road : Roads())
+    {
+        if(road.type != Model::Road::Type::Footway){
+            for(int node_idx : Ways()[road.way].nodes){
+                dist = input.distance(SNodes()[node_idx]);
+                if(dist < min_dist ){
+                    closest_idx = node_idx;
+                    min_dist = dist;
+                }
+            }
+        }
+    }
+    return SNodes()[node_idx];
 }
