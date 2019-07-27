@@ -7,5 +7,3 @@ build/
 bin/
 lib/
 .vscode
-test/
-thirdparty/
