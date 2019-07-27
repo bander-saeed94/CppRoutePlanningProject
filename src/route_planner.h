@@ -16,6 +16,7 @@ public:
   {
     return distance;
   }
+  void AStarSearch();
 
 private:
   // Add private variables or methods declarations here.
